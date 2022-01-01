@@ -1,0 +1,43 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<String> ml= new ArrayList<>();
+        List<List<String>>ls=new ArrayList<List<String>>();
+        if(strs.length==1)
+        {
+            ml.add(strs[0]);
+            ls.add(ml);
+            return ls;
+        }
+        String sorted[]=new String[strs.length];
+        
+        //Sorting each string alphabetically and storing it in another string array
+        for(int i=0;i<strs.length;i++)
+        {
+            String ele=strs[i];
+            char tempArray[]=ele.toCharArray();
+            Arrays.sort(tempArray);
+            sorted[i]=new String(tempArray);
+        }
+        
+        //Comparing and grouping anagrams into a list.
+        for(int i=0;i<sorted.length;i++)
+        {
+            if(!sorted[i].equals("0"))
+            {
+            List<String>nl= new ArrayList<String>();
+            nl.add(strs[i]);
+            System.out.println(nl);
+            for(int j=i+1;j<sorted.length;j++)
+            {
+                if(sorted[i].equals(sorted[j]))
+                {
+                    nl.add(strs[j]);
+                    sorted[j]="0";
+                }
+            }
+            ls.add(nl);
+        }
+        }
+        return ls;
+    }
+}
