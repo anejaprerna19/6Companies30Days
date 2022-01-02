@@ -1,0 +1,38 @@
+class Solution {
+    public int compress(char[] chars) {
+        String news="";
+        int count=1;
+        int i;
+        for(i=0;i<chars.length-1;i++)
+        {
+           if(chars[i]==chars[i+1])
+           {
+               count ++;
+           }
+            else
+            {
+              news+=chars[i];
+                if(count>1)
+                {   news+=count;
+                    count=1;
+                }
+            }
+        }
+        news+=chars[i];
+        if(count>1)
+            news+=count;
+        
+        int strlen=news.length();
+        for(i=chars.length-1;i>=0;i--)
+        {
+            if((i-strlen+1)>0)
+                chars[i]=' ';
+            
+            else
+            {
+                chars[i]=news.charAt(i);
+            }
+        }
+        return strlen;
+    }
+}
