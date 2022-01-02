@@ -1,0 +1,27 @@
+class GfG
+ {
+	String encode(String str)
+	{
+          //Your code here
+          String news="";
+          int count=1;
+          int i;
+          for(i=0;i<str.length()-1;i++)
+          {
+              if(str.charAt(i)==str.charAt(i+1) )
+              {
+                  count++;
+              }
+              else
+              {
+                  news+=str.charAt(i);
+                  news+=count;
+                  count=1;
+              }
+          }
+          news+=str.charAt(i);
+          news+=count;
+          return news;
+	}
+	
+ }
