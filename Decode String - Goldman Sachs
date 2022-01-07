@@ -1,0 +1,44 @@
+class Solution {
+    public String decodeString(String s) {
+        Stack<String> stack = new Stack();
+        int size = s.length();
+        int i = 0;
+        while(i<size){
+            char ch = s.charAt(i);
+            if(ch >= '0' && ch <= '9'){
+                String num = "";
+                // for 2/3 digit number
+                while(ch >= '0' && ch <= '9'){
+                    num = num+ch;
+                    i++;
+                    ch = s.charAt(i);    
+                }
+                stack.push(num);
+            } else if(ch == ']'){
+                String curr = "";
+                String tmp = stack.pop();
+                while(!tmp.equals("[")){
+                    curr = tmp + curr;
+                    tmp = stack.pop();
+                }
+                int n = Integer.valueOf(stack.pop());
+                String nTime = curr;
+                // j < n-1 since we already have one copy
+                for(int j=0;j<n-1;j++){
+                    nTime = nTime + curr;
+                }
+                stack.push(nTime);
+                i++;
+            } else  {
+                stack.push(""+ch);
+                i++;
+            }
+        }
+        String curr = "";
+        while(!stack.isEmpty()){
+            String tmp = stack.pop();
+            curr = tmp + curr;
+        }
+        return curr;
+    }
+}
